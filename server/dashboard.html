@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Time Tracker Dashboard</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h1>Tracked Time Logs</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>Duration (seconds)</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="logs"></tbody>
+  </table>
+
+  <script>
+    fetch("/api/logs")
+      .then(res => res.json())
+      .then(data => {
+        const logsTable = document.getElementById("logs");
+        data.forEach(log => {
+          const row = `<tr>
+            <td>${log.url}</td>
+            <td>${Math.floor(log.duration / 1000)}</td>
+            <td>${new Date(log.date).toLocaleString()}</td>
+          </tr>`;
+          logsTable.innerHTML += row;
+        });
+      });
+  </script>
+</body>
+</html>

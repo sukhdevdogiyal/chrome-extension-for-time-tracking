@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Time Tracker",
+  "version": "1.0",
+  "description": "Track time spent on tabs",
+  "permissions": ["tabs", "activeTab"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Tab Time Tracker"
+  }
+}
