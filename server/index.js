@@ -7,17 +7,19 @@ const TimeLog = require("./models/TimeLog");
 const app = express();
 const PORT = 5000;
 
+// Connect to MongoDB
 mongoose.connect("mongodb://localhost:27017/trackerDB", {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
 .then(() => console.log("✅ MongoDB connected"))
 .catch(err => console.error("❌ DB Error:", err));
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Save log
+// Save log to DB
 app.post("/log", async (req, res) => {
   try {
     const log = new TimeLog(req.body);
@@ -28,12 +30,12 @@ app.post("/log", async (req, res) => {
   }
 });
 
-// Serve dashboard
-app.get("/logs", (req, res) => {
+// Serve the dashboard UI
+app.get(["/", "/logs"], (req, res) => {
   res.sendFile(path.join(__dirname, "dashboard.html"));
 });
 
-// API for dashboard
+// Fetch logs from DB for dashboard
 app.get("/api/logs", async (req, res) => {
   try {
     const logs = await TimeLog.find().sort({ date: -1 });
@@ -43,6 +45,7 @@ app.get("/api/logs", async (req, res) => {
   }
 });
 
+// Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`✅ Chrome Time Tracker Backend is running at http://localhost:${PORT}`);
 });

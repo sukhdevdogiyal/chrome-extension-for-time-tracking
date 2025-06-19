@@ -6,7 +6,7 @@
 - INTERN ID : CT08DL212
 - DOMAIN : FULL STACK WEB DEVELOPMENT
 - BATCH DURATION : April 30th,2025 TO June 30th,2025
-- MENTOR NAME : Vaishali Shrivastava
+- MENTOR NAME : Neela Santhosh
 
 A full-stack project that tracks time spent on browser tabs using a Chrome Extension, stores it in a Node.js + MongoDB backend, and displays logs in a dashboard.
 
@@ -14,14 +14,24 @@ A full-stack project that tracks time spent on browser tabs using a Chrome Exten
 ## 📁 Project Structure
 ```pgsql
 chrome-time-tracker/
-├── extension/          ← Chrome extension files
-│   ├── manifest.json
-│   └── background.js
-├── server/             ← Node.js backend
-│   ├── index.js
-│   ├── dashboard.html  ← Web dashboard
-│   └── models/
-│       └── TimeLog.js
+│
+├── extension/ # Chrome Extension frontend
+│ ├── manifest.json
+│ ├── background.js
+│ └── popup.html / popup.js
+│
+├── server/ # Backend server
+│ ├── index.js
+│ ├── models/
+│ │ └── TimeLog.js
+│ ├── dashboard.html
+│ └── package.json
+│
+├── screenshots/ # UI snapshots for reference
+│   ├── extension-popup.png
+│   └── dashboard.png
+│
+└──README.md
 ```
 
 ## 🚀 Features
@@ -54,7 +64,7 @@ Start it with:
 mongod
 ```
 
-### 🧪 2. Setup Backend
+### 🧪 2. Setup Backend Server
 ```bash
 cd chrome-time-tracker/server
 npm install
@@ -64,7 +74,7 @@ It runs at: http://localhost:5000
 
 
 
-### 🧱 3. Load Chrome Extension
+### 🧩 3. Load Chrome Extension
 - Open Chrome → go to chrome://extensions/
 - Enable Developer Mode
 - Click Load unpacked
@@ -74,8 +84,8 @@ It runs at: http://localhost:5000
 ### 📊 4. View Dashboard
 After using the extension for a few seconds...
 
-Go to:
-👉 http://localhost:5000/logs
+Go to:  
+👉 http://localhost:5000/logs  
 To see your tracked time in a table!
 
 
@@ -102,6 +112,14 @@ Returns all logs:
   }
 ]
 ```
+
+## 📷 Screenshots
+### 🔹 Chrome Extension Popup
+![Extension Popup](./screenshots/extension-popup.png)
+
+### 🔹 Time Logs Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
 
 
 ## 🧹 How to Stop It
